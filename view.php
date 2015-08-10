@@ -1,18 +1,11 @@
 <?php
 
+include 'credentials.php';
 
 $first_name="";
 $last_name="";
 $items="";
 
-
-
-
-
-$server = "localhost";
-$username = "lamp";
-$password = "1";
-$database = "javascript";
 
 
 

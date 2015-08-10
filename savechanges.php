@@ -1,6 +1,8 @@
 <?php
 
 
+include 'credentials.php';
+
 $usernameorder="";
 $order = "";
 $items = "";
@@ -28,6 +30,17 @@ if($_POST)
 		$last = substr($comma_separated, -1); 
 	}
 
+	$ok = 0;
+	while ($ok ==0){
+		    $pos = strpos($comma_separated, ",,");
+		    if ($pos === false) {
+		    	$ok =1;
+		    }
+		    else{
+				$comma_separated = str_replace(",,", ",", $comma_separated);
+		    }
+	}
+
 }
 
 
@@ -40,10 +53,6 @@ if($_POST)
 
 
 
-$server = "localhost";
-$username = "lamp";
-$password = "1";
-$database = "javascript";
 
 $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
 mysql_select_db($database, $con);

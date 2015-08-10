@@ -36,7 +36,7 @@
             			success: function (html) {
             			   console.log(html);
             			   var obj = JSON.parse(html);
-            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>Edit</th><th>Delete</th>";
+            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
             			   for(var i in obj)
 							       {
 								        var id = obj[i].id;
@@ -45,7 +45,7 @@
 							          var user = obj[i].user;
 							          var items = obj[i].items;
 							          //console.log(user);
-							          table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							          table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
 							     }
 
 
@@ -63,6 +63,13 @@
 							$( ".table" ).append(table);
 							$( ".neworder" ).show();
 							$( ".form_neworder" ).hide();
+
+
+              // clearing results display
+      
+              $( ".result_edit" ).empty();
+              $( ".result" ).empty();
+              $( ".result_creation" ).empty();
 
             			}
             		});
@@ -156,14 +163,20 @@
   
                   console.log( "Load editcreationhelper was performed." );
               });
-              
+
               $.getScript( "canceladditem.js", function( data, textStatus, jqxhr ) {
 
                   console.log( "Load canceladditem was performed." );
                });
 
 
-              $( ".result_edit" ).empty();
+
+
+              // clearing results display
+              $( ".result_delete" ).empty();
+          
+              $( ".result" ).empty();
+              $( ".result_creation" ).empty();
               
               },
             error:  function () {
@@ -175,5 +188,99 @@
 
        });
 
+
+
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+
+      //VIEW Details Operation
+       $( ".viewitem" ).click(function() {
+
+             console.log("viewing details...");
+
+
+             // cleaning any other items from the past
+             $( ".singleitem" ).remove();
+
+             var userfromform = $(".usernameorder").val();
+             console.log(userfromform);
+
+
+             var viewid = "editid=" + $(this).attr('id');
+             console.log(viewid);
+
+
+
+          $.ajax({
+             // var deleteid = $(this).attr('id');
+            //  console.log(deleteid);
+            type: 'post',
+            url: 'getordertoedit.php',
+            data: viewid,
+            success: function (html) {
+              var $html = html;
+              console.log(html); 
+              console.log(viewid);
+   
+
+              // Create Form to edit order
+              var obj = JSON.parse(html);
+              console.log("OBJ: " + obj);
+              var detail = "<div class='' style='margin:10px; padding:10px;float:left;positon:relative'><h1>Details on order</h1><br>";
+              for(var i in obj)
+                     {
+                        var id = obj[i].id;
+                        var order = obj[i].ordername;
+                        //console.log(order);
+                        var user = obj[i].user;
+                        var items = obj[i].items;
+                        var create = obj[i].timestamp;
+                        var image = obj[i].image;
+                        console.log("image: " + image);
+                        console.log(order);
+                        detail = detail + 'Order id: ' + id + "<br>Created by: " + user + '<br>Date: ' + create +'<br>Order Name: ' + order + "<br><ul>";
+                        var array = items.split(',');
+
+                        var arrayLength = array.length;
+                        var items ="";
+                        for (var i = 0; i < arrayLength; i++) {
+                            items =  items + '<li>' + array[i] +  '</li>' ;
+                            //Do something
+                        }
+
+                        detail = detail + items; 
+
+                        detail = detail + '</ul></div><div style="float:left;position:relative;max-height:200px;max-width:200px;margin-top:30px;margin-left: 80px;"><img style="float:left;position:relative;max-height:200px;max-width:200px;" src="uploads/' + image + '"></img></div>';
+
+                                
+                   }
+              console.log(detail);
+              $( ".modal-content" ).empty();
+              $( ".modal-content" ).append(detail);
+              $('#myModal').modal('show');
+          
+
+              // clearing results display
+              $( ".result_delete" ).empty();
+              $( ".result_edit" ).empty();
+              $( ".result" ).empty();
+              $( ".result_creation" ).empty();
+              
+
+
+              
+              },
+            error:  function () {
+              console.log("Error");
+            }
+          });
+
+
+       });
 
 

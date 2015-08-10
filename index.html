@@ -5,7 +5,8 @@
 <title>Javascript Framework with AJAX: All CRUD operations available</title>
 
 
-<script src="jquery-2.1.4.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -15,6 +16,8 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 
 </head>
 
@@ -73,7 +76,7 @@
         </div>
 
 		<!-- CREATE FORM-->
-		<form class="form_neworder" style="display:none;">
+		<form class="form_neworder" style="display:none;" enctype="multipart/form-data">
 			CREATE NEW ORDER:
 			<br>
 			<input type="text" name="usernameorder" class="usernameorder" hidden required >
@@ -87,9 +90,23 @@
 		    <div class="additem" style="cursor: pointer">
 				<p>Add an Item</p>
 			</div>
+			<input type="file" name="fileToUpload" id="fileToUpload"/><br>
 			<input name="submit" type="submit" value="Save new Order" class="btn btn-primary">
 			<button type='button' class='btn btn-warning cancelordercreation'>Cancel Order Creation</button>
 		</form>
+
+
+		<!-- Modal -->
+		<div id="myModal" class="modal fade myModal" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content row">
+
+		    </div>
+
+		  </div>
+		</div>
 		
 
 
@@ -102,15 +119,96 @@
     <script>
 
 
+    	// COOKIE FUNCTIONS///////////////////////////////////////////////////////////////
+		function createCookie(name,value,days) {
+		    if (days) {
+		        var date = new Date();
+		        date.setTime(date.getTime()+(days*24*60*60*1000));
+		        var expires = "; expires="+date.toGMTString();
+		    }
+		    else var expires = "";
+		    document.cookie = name+"="+value+expires+"; path=/";
+		}
+
+		function readCookie(name) {
+		    var nameEQ = name + "=";
+		    var ca = document.cookie.split(';');
+		    for(var i=0;i < ca.length;i++) {
+		        var c = ca[i];
+		        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		    }
+		    return null;
+		}
+
+		function eraseCookie(name) {
+		    createCookie(name,"",-1);
+		}
+		///////////////////////////////////////////////////////////////////////////////////
+
+
+
+    	// ON DOCUMENT READY/////////////////////////////////////////////////////////////
+	    $( document ).ready(function() {
+	    	console.log( "Document ready!" );
+	    	var cookie = readCookie("loggedin");
+	    	if (cookie != ""){
+	    		console.log("found a cookie");
+	    		$('.loginform').hide();
+
+				var usardata = "username=" + cookie;
+
+				$(".usernameorder").val(cookie); // get it ready to pass username to save functions...
+	    		$.ajax({
+            			type: 'post',
+            			url: 'table.php',
+            			data: usardata,
+            			success: function (html) {
+            			   console.log(html);
+            			   var obj = JSON.parse(html);
+            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
+            			   for(var i in obj)
+							{
+								 var id = obj[i].id;
+							     var order = obj[i].ordername;
+							     //console.log(order);
+							     var user = obj[i].user;
+							     var items = obj[i].items;
+							     //console.log(user);
+
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" + "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							}
+							//console.log(obj[1].order);
+
+
+							$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
+
+								  console.log( "Load was performed." );
+								});
+
+						
+						
+							$( ".table" ).toggle();
+							$( ".table" ).append(table);
+							$( ".neworder" ).toggle();
+
+							
+
+
+            			}
+            		});
+
+	    		
+	    	}
+		});
+
+		///////////////////////////////////////////////////////////////////////////////////
 
 
       // Login and READ 
       $(function () {
 
         $('.loginform').on('submit', function (e) {
-
-        	//console.log("form sent");
-
 
 
           e.preventDefault();
@@ -148,7 +246,7 @@
             			success: function (html) {
             			   console.log(html);
             			   var obj = JSON.parse(html);
-            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>Edit</th><th>Delete</th>";
+            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
             			   for(var i in obj)
 							{
 								 var id = obj[i].id;
@@ -158,7 +256,7 @@
 							     var items = obj[i].items;
 							     //console.log(user);
 
-							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" + "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
 							}
 							//console.log(obj[1].order);
 
@@ -173,6 +271,12 @@
 							$( ".table" ).toggle();
 							$( ".table" ).append(table);
 							$( ".neworder" ).toggle();
+
+							// SET COOKIES
+							createCookie("loggedin",user,10);
+
+						    //READ COOKIES
+						    console.log("READING COOKIES: " + readCookie("loggedin"));
 
 
             			}
@@ -227,7 +331,15 @@
       //WRITE NEW ORDER
        $('.form_neworder').on('submit', function (e) {
 
+       	    console.log("saving new order....");
+        	console.log($(new FormData(this)));
+
+			var fu1 = document.getElementById("fileToUpload");
+			console.log("You selected " + fu1.value);
+
              e.preventDefault();
+
+
 
              // clearing results display
             $( ".result_delete" ).empty();
@@ -243,7 +355,10 @@
           $.ajax({
             type: 'post',
             url: 'post.php',
-            data: $('form').serialize(),
+            data: new FormData(this),
+            contentType: false,
+			cache: false,
+			processData:false,
             success: function () {
               $( ".result_creation" ).empty();
               $( ".result_creation" ).append("<strong>New Order Saved</strong>");
@@ -259,7 +374,7 @@
             			success: function (html) {
             			   console.log(html);
             			   var obj = JSON.parse(html);
-            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>Edit</th><th>Delete</th>";
+            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
             			   for(var i in obj)
 							{
 								 var id = obj[i].id;
@@ -268,7 +383,7 @@
 							     var user = obj[i].user;
 							     var items = obj[i].items;
 							     console.log(order);
-							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>"  +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
 							}
 
 
@@ -284,6 +399,7 @@
 							$( ".table" ).append(table);
 							$( ".neworder" ).show();
 							$( ".form_neworder" ).hide();
+							$( ".singleitem" ).remove();
 
             			}
             		});

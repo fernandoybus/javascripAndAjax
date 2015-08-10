@@ -1,6 +1,7 @@
 <?php
 
 
+include 'credentials.php';
 
 
 if($_POST)
@@ -19,10 +20,7 @@ if($_POST)
 
 //echo $username; 
 
-$server = "localhost";
-$username = "lamp";
-$password = "1";
-$database = "javascript";
+
 
 $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
 mysql_select_db($database, $con);
