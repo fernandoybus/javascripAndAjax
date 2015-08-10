@@ -2,11 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Javascript Framework</title>
+<title>Javascript Framework with AJAX: All CRUD operations available</title>
 
 
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="jquery-2.1.4.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -21,52 +20,176 @@
 
 <body>
 	<div class="container">
-		<h1>JS Framework</h1>
 
 
-		<form>
-			First name:<br>
-			<input type="text" name="firstname" required>
+  
+		<h1>Javascript Framework with AJAX</h1>
+		<h5>All CRUD operations available</h5>
+
+
+		<!-- LOGIN-->
+		<div class="divform">
+		<form class="loginform">
+			Username:<br>
+			<input type="text" name="username" required value="fernandoybus">
 			<br>
-			Last name:<br>
-			<input type="text" name="lastname" required>
+			Password:<br>
+			<input type="text" name="password" required value="test">
 			<br>
+			<br>
+			<input name="submit" type="submit" value="Login" class="btn btn-primary">
+		</form>
+		</div>
+
+
+
+
+        <!-- TABLE READ RESULTS-->
+		<div class="table" style="display:none;">
+		</div>
+
+
+
+		<!-- DISPLAY RESULTS FROM OPERATIONS-->
+		<div class="result">
+		</div>
+		<div class="result_delete">
+		</div>
+		<div class="result_edit">
+		</div>
+		<div class="result_creation">
+		</div>
+
+
+
+
+        <!-- BUTTON SHOW CREATE FORM-->
+		<form class="neworder" style="display:none;">
+			<input name="submit" type="submit" value="Create new Order" class="btn btn-primary">
+		</form>
+
+        <!-- FORM to edit an order-->
+        <div class="formtoeditorders" style="padding:10px 0px;margin:10px 0px;">
+        </div>
+
+		<!-- CREATE FORM-->
+		<form class="form_neworder" style="display:none;">
+			CREATE NEW ORDER:
+			<br>
+			<input type="text" name="usernameorder" class="usernameorder" hidden required >
+			Order:<br>
+			<input type="text" name="order" class="order" required value=""><br>
 			Item:<br>
 			<div class="item">
-				<input type="text" name="item[]" required>
+				<input type="text" name="item[]" class="item" required>
 		    </div>
 		    <br>
 		    <div class="additem" style="cursor: pointer">
 				<p>Add an Item</p>
 			</div>
-			<input name="submit" type="submit" value="Submit">
+			<input name="submit" type="submit" value="Save new Order" class="btn btn-primary">
+			<button type='button' class='btn btn-warning cancelordercreation'>Cancel Order Creation</button>
 		</form>
+		
 
 
-		<div class="result"></div>
+
 
 	</div>
 </body>
 
 
     <script>
+
+
+
+
+      // Login and READ 
       $(function () {
 
-        $('form').on('submit', function (e) {
+        $('.loginform').on('submit', function (e) {
+
+        	//console.log("form sent");
+
+
 
           e.preventDefault();
-
+          console.log($('form').serialize());
           $.ajax({
             type: 'post',
-            url: 'post.php',
+            url: 'login.php',
             data: $('form').serialize(),
-            success: function () {
-              $( ".result" ).empty();
-              $( ".result" ).append("<strong>Data Saved</strong>");
+            
+
+            // DO LOGIN
+            success: function (html) {
+            	var $html = JSON.parse(html); 
+            	//console.log($html["response"]);
+            	//console.log($html["user"]);
+            	var user = $html["user"];
+            	console.log("USERRRRRR: " + user);
+            	var usardata = "username=" + user;
+            	console.log(usardata);
+
+            	// SAVE USER TO FORM THAT CREATES NEW ORDER
+            	$(".usernameorder").val(user);
+            	//..... continue processing....
+
+            	$html = $html["response"];
+            	if ($html==1){
+            		$( ".divform" ).empty();
+
+            		
+            		// GET INFORMATION TO FILL IN THE TABLE
+            		$.ajax({
+            			type: 'post',
+            			url: 'table.php',
+            			data: usardata,
+            			success: function (html) {
+            			   console.log(html);
+            			   var obj = JSON.parse(html);
+            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>Edit</th><th>Delete</th>";
+            			   for(var i in obj)
+							{
+								 var id = obj[i].id;
+							     var order = obj[i].ordername;
+							     //console.log(order);
+							     var user = obj[i].user;
+							     var items = obj[i].items;
+							     //console.log(user);
+
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							}
+							//console.log(obj[1].order);
+
+
+							$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
+
+								  console.log( "Load was performed." );
+								});
+
+						
+						
+							$( ".table" ).toggle();
+							$( ".table" ).append(table);
+							$( ".neworder" ).toggle();
+
+
+            			}
+            		});
+
+
+            	}
+            	// COULD NOT LOGIN
+            	else{
+            		$( ".result" ).append("<strong>Could not login. Chech credentials or create a new user</strong>");
+
+            	}
+
+  				
               },
             error:  function () {
-              $( ".result" ).empty();
-              $( ".result" ).append("<strong>That was an error</strong>");
+
             }
           });
 
@@ -74,8 +197,134 @@
 
       });
 
-	$( ".additem" ).click(function() {
-	  $( ".item" ).append( '<br>Item:<br><input type="text" name="item[]" required>');
-	});
+
+      // DISPLAY FORM TO CREATE A NEW ORDER
+      $(function () {
+
+
+        $('.neworder').on('submit', function (e) {
+
+        	console.log("create new item");
+
+
+             // clearing results display
+        	$( ".result_delete" ).empty();
+        	$( ".result_edit" ).empty();
+			$( ".result" ).empty();
+			$( ".result_creation" ).empty();
+
+			
+
+          e.preventDefault();
+          $( ".form_neworder" ).show('slow');
+          $( ".neworder" ).hide();
+          
+          
+        });
+      });
+
+
+      //WRITE NEW ORDER
+       $('.form_neworder').on('submit', function (e) {
+
+             e.preventDefault();
+
+             // clearing results display
+            $( ".result_delete" ).empty();
+        	$( ".result_edit" ).empty();
+			$( ".result" ).empty();
+			$( ".result_creation" ).empty();
+
+             console.log($('form').serialize());
+             var userfromform = $(".usernameorder").val();
+             console.log(userfromform);
+             // console.log("The user is: " userfromform);
+
+          $.ajax({
+            type: 'post',
+            url: 'post.php',
+            data: $('form').serialize(),
+            success: function () {
+              $( ".result_creation" ).empty();
+              $( ".result_creation" ).append("<strong>New Order Saved</strong>");
+              $( ".order" ).val( "" );
+              $( ".item" ).val( "" );
+              
+              // REDO TABLE TO VIEW RESULTS
+                     $( ".table" ).empty();
+                     $.ajax({
+            			type: 'post',
+            			url: 'table.php',
+            			data: "username=" + userfromform,
+            			success: function (html) {
+            			   console.log(html);
+            			   var obj = JSON.parse(html);
+            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>Edit</th><th>Delete</th>";
+            			   for(var i in obj)
+							{
+								 var id = obj[i].id;
+							     var order = obj[i].ordername;
+							     //console.log(order);
+							     var user = obj[i].user;
+							     var items = obj[i].items;
+							     console.log(order);
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							}
+
+
+
+							$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
+	
+								  console.log( "Load was performed." );
+								});
+
+
+
+							$( ".table" ).show();
+							$( ".table" ).append(table);
+							$( ".neworder" ).show();
+							$( ".form_neworder" ).hide();
+
+            			}
+            		});
+          
+
+			},
+            error:  function () {
+              $( ".result_creation" ).empty();
+              $( ".result_creation" ).append("<strong>That was an error</strong>");
+            }
+          });
+
+       });
+
+
+		// ADD ITEM ON CREATION OF ORDER VIA JS
+		$( ".additem" ).click(function() {
+		  $( ".item" ).append( '<div class="singleitem"><br>Item:<br><input type="text" name="item[]"> <span class="canceladditem glyphicon glyphicon-minus"></span></div>');
+
+
+		 $.getScript( "canceladditem.js", function( data, textStatus, jqxhr ) {
+								  console.log( textStatus ); // Success
+								  console.log( jqxhr.status ); // 200
+								  console.log( "Load was performed." );
+		  });
+		});
+     
+
+
+     		// ADD ITEM ON CREATION OF ORDER VIA JS
+		$( ".cancelordercreation" ).click(function() {
+			console.log("cancel order creation");
+			$(".form_neworder").hide();
+			$(".neworder").show();
+			
+		});
+
+
+
+
+
+
     </script>
 </html>

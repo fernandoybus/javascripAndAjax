@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascript Framework</title>
+
+
+<script src="jquery-2.1.4.min"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<div class="container">
+		<h1>JS Framework</h1>
+
+
+		<form>
+			First name:<br>
+			<input type="text" name="firstname" required>
+			<br>
+			Last name:<br>
+			<input type="text" name="lastname" required>
+			<br>
+			Item:<br>
+			<div class="item">
+				<input type="text" name="item[]" required>
+		    </div>
+		    <br>
+		    <div class="additem" style="cursor: pointer">
+				<p>Add an Item</p>
+			</div>
+			<input name="submit" type="submit" value="Submit">
+		</form>
+
+
+		<div class="result"></div>
+
+	</div>
+</body>
+
+
+    <script>
+      $(function () {
+
+        $('form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          $.ajax({
+            type: 'post',
+            url: 'post.php',
+            data: $('form').serialize(),
+            success: function () {
+              $( ".result" ).empty();
+              $( ".result" ).append("<strong>Data Saved</strong>");
+              },
+            error:  function () {
+              $( ".result" ).empty();
+              $( ".result" ).append("<strong>That was an error</strong>");
+            }
+          });
+
+        });
+
+      });
+
+	$( ".additem" ).click(function() {
+	  $( ".item" ).append( '<br>Item:<br><input type="text" name="item[]" required>');
+	});
+    </script>
+</html>

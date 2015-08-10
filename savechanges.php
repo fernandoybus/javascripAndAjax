@@ -1,16 +1,18 @@
 <?php
 
 
+$usernameorder="";
+$order = "";
+$items = "";
+$id="";
 
 
-
-$usernameorder=" test";
-$order="test ";
 
 if($_POST)
 {
 	$usernameorder=$_POST['usernameorder'];
-	$order=$_POST['order'];
+	$id = $_POST['id'];
+	$order=$_POST['ordername'];
 	$items=$_POST['item'];
 
 
@@ -26,9 +28,14 @@ if($_POST)
 		$last = substr($comma_separated, -1); 
 	}
 
-
 }
 
+
+//hard code test
+// $usernameorder="fernandoybus";
+// $order = "ordem 34";
+// $items = ["item 33", "item 33"];
+// $id="19";
 
 
 
@@ -44,7 +51,8 @@ mysql_select_db($database, $con);
 
 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
 	mysql_select_db($database, $con);
-         $sql = "INSERT INTO orders (user, ordername, items) VALUES('$usernameorder', '$order', '$comma_separated')";
+	     $sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
+         //$sql = "INSERT INTO orders (user, ordername, items) VALUES('$usernameorder', '$order', '$comma_separated')";
          echo $sql;
          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
