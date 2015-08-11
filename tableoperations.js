@@ -129,7 +129,7 @@
 
               // Create Form to edit order
               var obj = JSON.parse(html);
-              var form = "<form class='editingorder' style='border:1px solid #ccc';width:100px; padding: 10px 10px; margin:10px 10px;>";
+              var form = "<form enctype='multipart/form-data' class='editingorder' style='border:1px solid #ccc';width:100px; padding: 10px 10px; margin:10px 10px;>";
               for(var i in obj)
                      {
                         var id = obj[i].id;
@@ -150,7 +150,7 @@
 
                         form = form + items; 
 
-                        form = form + '</div><div class="additemonedition" style="cursor: pointer"><p>Add an Item</p></div>' +'<br><input name="submit" type="submit" value="Save Changes" class="btn btn-primary"></form>';
+                        form = form + '</div><div class="additemonedition" style="cursor: pointer"><p>Add an Item</p></div>' +'<br><input type="file" name="fileToUpload" id="fileToUpload"/><br><br><input name="submit" type="submit" value="Save Changes" class="btn btn-primary"></form>';
 
                                 
                    }
@@ -255,7 +255,19 @@
 
                         detail = detail + items; 
 
-                        detail = detail + '</ul></div><div style="float:left;position:relative;max-height:200px;max-width:200px;margin-top:30px;margin-left: 80px;"><img style="float:left;position:relative;max-height:200px;max-width:200px;" src="uploads/' + image + '"></img></div>';
+
+
+                        if (image == ""){
+
+                        detail = detail + '</ul></div><div style="float:left;position:relative;max-height:200px;max-width:200px;margin-top:30px;margin-left: 80px;"></div>';
+
+                        }
+                        else{
+
+                        detail = detail + '</ul></div><div style="float:left;position:relative;max-height:200px;max-width:200px;margin-top:40px;margin-left: 80px;"><img style="float:left;position:relative;max-height:200px;max-width:200px;" src="uploads/' + image + '"></img></div>';
+
+
+                        }
 
                                 
                    }

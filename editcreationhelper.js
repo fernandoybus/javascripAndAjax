@@ -20,7 +20,11 @@
 
 
        		 console.log("Saving Changes on existing order....");
-             e.preventDefault();
+           e.preventDefault();
+
+
+           var fu1 = document.getElementById("fileToUpload");
+           console.log("You selected " + fu1.value);
 
              // clearing results display
             $( ".result_delete" ).empty();
@@ -38,10 +42,15 @@
              var items = $(".items").val();
              console.log(items);
 
+
+
           $.ajax({
             type: 'post',
             url: 'savechanges.php',
-            data: $('form').serialize(),
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
             success: function () {
               $( ".result_edit" ).empty();
               $( ".result_edit" ).append("<strong>Changes on Order Saved</strong>");

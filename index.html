@@ -29,19 +29,23 @@
 		<h1>Javascript Framework with AJAX</h1>
 		<h5>All CRUD operations available</h5>
 
+		<button type='button' class='btn btn-default logout' style="display:none;float:right;margin-top:-70px;"><span class="glyphicon glyphicon-remove-sign"> Logout</span></button>
+		
 
 		<!-- LOGIN-->
 		<div class="divform">
-		<form class="loginform">
+		<form class="loginform" method="post">
 			Username:<br>
 			<input type="text" name="username" required value="fernandoybus">
 			<br>
 			Password:<br>
-			<input type="text" name="password" required value="test">
+			<input type="password" name="password" required value="test">
 			<br>
 			<br>
 			<input name="submit" type="submit" value="Login" class="btn btn-primary">
 		</form>
+		<br>
+		<button type='button' class='btn btn-primary registernewuser'>Register New User</button>
 		</div>
 
 
@@ -62,12 +66,13 @@
 		</div>
 		<div class="result_creation">
 		</div>
-
+		<div class="result_createnewuser">
+		</div>
 
 
 
         <!-- BUTTON SHOW CREATE FORM-->
-		<form class="neworder" style="display:none;">
+		<form class="neworder" style="display:none;" method="post">
 			<input name="submit" type="submit" value="Create new Order" class="btn btn-primary">
 		</form>
 
@@ -76,7 +81,7 @@
         </div>
 
 		<!-- CREATE FORM-->
-		<form class="form_neworder" style="display:none;" enctype="multipart/form-data">
+		<form class="form_neworder" style="display:none;" enctype="multipart/form-data" method="post">
 			CREATE NEW ORDER:
 			<br>
 			<input type="text" name="usernameorder" class="usernameorder" hidden required >
@@ -107,8 +112,26 @@
 
 		  </div>
 		</div>
+
+
+		<!-- REGISTER USER FORM-->
+		<form class="form_newuser" style="display:none;" enctype="multipart/form-data" method="post">
+			REGISTER NEW USER:
+			<br>
+			Username:<br>
+			<input type="text" name="newusername" class="username" required ><br>
+			Email:<br>
+			<input type="email" name="newemail" class="email" required value=""><br>
+			Password:<br>
+			<input type="password" name="newpassword" class="password" required value=""><br>
+			<br>
+			<input name="submit" type="submit" value="Register new User" class="btn btn-primary">
+		</form>
 		
 
+
+		<br>
+		<br>
 
 
 
@@ -152,9 +175,17 @@
 	    $( document ).ready(function() {
 	    	console.log( "Document ready!" );
 	    	var cookie = readCookie("loggedin");
-	    	if (cookie != ""){
+	    	if (cookie != null){
 	    		console.log("found a cookie");
+	    		//READ COOKIES
+				console.log("READING COOKIES: " + readCookie("loggedin"));
 	    		$('.loginform').hide();
+	    		$('.form_newuser').hide();
+	    		$('.registernewuser').hide();
+	    		$('.logout').show();
+
+	    		
+	    		
 
 				var usardata = "username=" + cookie;
 
@@ -202,9 +233,7 @@
 	    	}
 		});
 
-		///////////////////////////////////////////////////////////////////////////////////
-
-
+	  ///////////////////////////////////////////////////////////////////////////////////
       // Login and READ 
       $(function () {
 
@@ -235,7 +264,10 @@
 
             	$html = $html["response"];
             	if ($html==1){
-            		$( ".divform" ).empty();
+            		$( ".divform" ).hide();
+            		$('.form_newuser').hide();
+	    		    $('.registernewuser').hide();
+	    		    $('.logout').show();
 
             		
             		// GET INFORMATION TO FILL IN THE TABLE
@@ -263,7 +295,7 @@
 
 							$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
 
-								  console.log( "Load was performed." );
+								  console.log( "Load tableoperations was performed." );
 								});
 
 						
@@ -302,6 +334,142 @@
       });
 
 
+
+
+	  ///////////////////////////////////////////////////////////////////////////////////
+      // REGISTER NEW USER
+      $(function () {
+
+        $('.form_newuser').on('submit', function (e) {
+
+          //cleaning any previous results	
+		  $( ".result" ).empty();
+
+
+          console.log('Registering new user');	
+          e.preventDefault();
+          console.log($('form').serialize());
+          $.ajax({
+            type: 'post',
+            url: 'create_user.php',
+            data: $('form').serialize(),
+            
+
+            // DO LOGIN
+            success: function (html) {
+            	var $html = JSON.parse(html); 
+            	//console.log($html["response"]);
+            	//console.log($html["user"]);
+            	var user = $html["user"];
+            	console.log("USERRRRRR: " + user);
+            	var usardata = "username=" + user;
+            	console.log(usardata);
+
+
+
+            	html = $html["response"];
+            	console.log("HTML Response:" + html);
+
+            	if (html==1){
+            		$( ".divform" ).hide();
+            		$('.form_newuser').hide();
+	    		    $('.registernewuser').hide();
+	    		    $('.logout').show();
+
+	    		     // SAVE USER TO FORM THAT CREATES NEW ORDER
+            	     $(".usernameorder").val(user);
+            	     //..... continue processing....
+
+
+	     			 // SET COOKIES
+				     createCookie("loggedin",user,10);
+
+            		
+            		// GET INFORMATION TO FILL IN THE TABLE
+            		$.ajax({
+            			type: 'post',
+            			url: 'table.php',
+            			data: usardata,
+            			success: function (html) {
+            			   console.log(html);
+
+            			   
+		            			   var obj = JSON.parse(html);
+		            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
+		            			   for(var i in obj)
+									{
+										 var id = obj[i].id;
+									     var order = obj[i].ordername;
+									     //console.log(order);
+									     var user = obj[i].user;
+									     var items = obj[i].items;
+									     //console.log(user);
+
+									     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" + "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+									}
+									//console.log(obj[1].order);
+
+
+									$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
+
+										  console.log( "Load tableoperations was performed." );
+										});
+
+								
+								    $( ".table-striped" ).show();
+									$( ".table" ).show();
+									$( ".table" ).toggle();
+									$( ".table" ).append(table);
+									
+
+									$(".logout").show();
+									$(".form_neworder").hide();
+									$(".neworder").show();
+
+									
+									$( ".result" ).append("<strong>Welcome to the system. Start Creating some orders....");
+									
+									
+							
+
+									// SET COOKIES
+									createCookie("loggedin",user,10);
+
+								    //READ COOKIES
+								    console.log("READING COOKIES: " + readCookie("loggedin"));
+						    
+
+
+
+            			}
+            		});
+
+
+            	}
+            	// COULD NOT LOGIN
+            	if (html == 0 ){
+					$( ".result" ).append("<strong>This user already is taken.</strong>");
+				}
+
+				if (html == -1 ){
+					$( ".result" ).append("<strong>This email is already in use.</strong>");
+				}
+
+
+  				
+              },
+            error:  function () {
+
+            }
+          });
+
+        });
+
+      });
+
+
+
+	  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // DISPLAY FORM TO CREATE A NEW ORDER
       $(function () {
 
@@ -437,6 +605,56 @@
 			
 		});
 
+		// show form to register a new user
+		$( ".registernewuser" ).click(function() {
+			console.log("form to register new user");
+			$(".loginform").hide();
+			$(".registernewuser").hide();
+			$(".form_newuser").show();
+			
+		});
+
+
+		// Logout Delete Cookie
+		$( ".logout" ).click(function() {
+			console.log("logout");
+			createCookie("loggedin","",-1)
+		    //READ COOKIES
+		    console.log("READING COOKIES: " + readCookie("loggedin"));
+
+			$(".logout").hide();
+			$(".form_neworder").hide();
+			$(".neworder").hide();
+			$(".form_neworder").hide();
+			$(".table-striped").remove();
+			$(".table").hide();
+			$(".editingorder").hide();
+			$(".formtoeditorders").hide();
+
+
+			// clearing results display
+        	$( ".result_delete" ).empty();
+        	$( ".result_edit" ).empty();
+			$( ".result" ).empty();
+			$( ".result_creation" ).empty();
+
+			
+
+			
+
+			console.log("show initial page");
+			$(".loginform").show();
+			$(".divform").show();
+			$(".registernewuser").show();
+			
+
+			
+			
+
+			
+
+			
+		});
 
 
 

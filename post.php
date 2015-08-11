@@ -108,7 +108,7 @@ mysql_select_db($database, $con);
 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
 	mysql_select_db($database, $con);
          $sql = "INSERT INTO orders (user, ordername, items, image) VALUES('$usernameorder', '$order', '$comma_separated', '$image')";
-         echo $sql;
+         //echo $sql;
          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
 mysql_close($con);

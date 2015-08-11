@@ -14,6 +14,10 @@ if($_POST)
 }
 
 
+$custo = '08';
+$salt = 'Cf1213eParGlBJoOM0F6aJ';
+// Gera um hash baseado em bcrypt
+$hash = crypt($pass, '$2a$' . $custo . '$' . $salt . '$');
 
 
 //echo $username; 
