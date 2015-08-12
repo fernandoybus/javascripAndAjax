@@ -123,7 +123,7 @@ mysql_select_db($database, $con);
 	 	 else{
 	 	 	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
 	 	 }
-         echo $sql;
+         //echo $sql;
          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
 mysql_close($con);

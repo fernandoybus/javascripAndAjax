@@ -68,6 +68,9 @@
 		</div>
 		<div class="result_createnewuser">
 		</div>
+		<div class="result_recoverpassword">
+		</div>
+		<!-- ////////////////////////////// -->
 
 
 
@@ -101,7 +104,7 @@
 		</form>
 
 
-		<!-- Modal -->
+		<!-- Modal ////////////////////////////////////////////////// -->
 		<div id="myModal" class="modal fade myModal" role="dialog">
 		  <div class="modal-dialog">
 
@@ -127,7 +130,21 @@
 			<br>
 			<input name="submit" type="submit" value="Register new User" class="btn btn-primary">
 		</form>
-		
+
+
+		<!-- RECOVER PASSWORD ///////////////////////////////////////////////////////////////////////  -->
+		<form class="recoverpasswordform" style="display:none;" enctype="multipart/form-data" method="post">
+			Email:<br>
+			<input type="email" name="emailrecover" class="emailrecover" required value=""><br><br>
+			<input name="submit" type="submit" value="Receive password by email" class="btn btn-primary">
+		</form>
+
+		<br>
+		<button type='button' class='btn btn-default backtologin' style="display:none;">Back to Login</button>
+
+		<br>
+		<br>
+		<button type='button' class='btn btn-default recoverpassword' style="display:block;">Recover Password</button>
 
 
 		<br>
@@ -137,6 +154,12 @@
 
 	</div>
 </body>
+
+<footer>
+	<div class="container">
+		<p>This very same system using Angular only will be available soon.</p>
+	</div>
+</footer>
 
 
     <script>
@@ -222,6 +245,7 @@
 							$( ".table" ).toggle();
 							$( ".table" ).append(table);
 							$( ".neworder" ).toggle();
+							$(".recoverpassword").hide();
 
 							
 
@@ -239,6 +263,8 @@
 
         $('.loginform').on('submit', function (e) {
 
+
+          $( ".result" ).empty();
 
           e.preventDefault();
           console.log($('form').serialize());
@@ -268,6 +294,7 @@
             		$('.form_newuser').hide();
 	    		    $('.registernewuser').hide();
 	    		    $('.logout').show();
+	    		    $(".recoverpassword").hide();
 
             		
             		// GET INFORMATION TO FILL IN THE TABLE
@@ -375,6 +402,7 @@
             		$('.form_newuser').hide();
 	    		    $('.registernewuser').hide();
 	    		    $('.logout').show();
+	    		    $(".recoverpassword").hide();
 
 	    		     // SAVE USER TO FORM THAT CREATES NEW ORDER
             	     $(".usernameorder").val(user);
@@ -484,6 +512,7 @@
         	$( ".result_edit" ).empty();
 			$( ".result" ).empty();
 			$( ".result_creation" ).empty();
+			$( ".result_recoverpassword" ).empty();
 
 			
 
@@ -496,7 +525,7 @@
       });
 
 
-      //WRITE NEW ORDER
+      //WRITE NEW ORDER//////////////////////////////////////////////////////////////////////////////////////
        $('.form_neworder').on('submit', function (e) {
 
        	    console.log("saving new order....");
@@ -597,7 +626,60 @@
      
 
 
-     		// ADD ITEM ON CREATION OF ORDER VIA JS
+
+
+      //RECOVER PASSWORD//////////////////////////////////////////////////////////////////////////////////////
+       $('.recoverpasswordform').on('submit', function (e) {
+
+       	    console.log("getting password to send by email....");
+        	console.log($(new FormData(this)));
+
+			var fu1 = document.getElementById("fileToUpload");
+			console.log("You selected " + fu1.value);
+
+             e.preventDefault();
+
+
+
+             // clearing results display
+            $( ".result_delete" ).empty();
+        	$( ".result_edit" ).empty();
+			$( ".result" ).empty();
+			$( ".result_creation" ).empty();
+			$( ".result_recoverpassword" ).empty();
+
+             console.log($('form').serialize());
+             var userfromform = $(".usernameorder").val();
+             console.log(userfromform);
+             // console.log("The user is: " userfromform);
+
+          $.ajax({
+            type: 'post',
+            url: 'recoverpassword.php',
+            data: new FormData(this),
+            contentType: false,
+			cache: false,
+			processData:false,
+            success: function () {
+              $( ".result_creation" ).empty();
+              $( ".result_recoverpassword" ).append("<strong>Password sent to your email.</strong>");
+              
+          
+
+			},
+            error:  function () {
+              $( ".result_creation" ).empty();
+              $( ".result_recoverpassword" ).append("<strong>We couldn't find your email....</strong>");
+            }
+          });
+
+       });
+
+
+
+
+
+        // ADD ITEM ON CREATION OF ORDER VIA JS////////////////////////////////////////////////////////
 		$( ".cancelordercreation" ).click(function() {
 			console.log("cancel order creation");
 			$(".form_neworder").hide();
@@ -605,17 +687,40 @@
 			
 		});
 
-		// show form to register a new user
+		// show form to register a new user////////////////////////////////////////////////////////
 		$( ".registernewuser" ).click(function() {
 			console.log("form to register new user");
 			$(".loginform").hide();
 			$(".registernewuser").hide();
 			$(".form_newuser").show();
+			$(".backtologin").show();
+			
+		});
+
+		// Go back to Login page////////////////////////////////////////////////////////
+		$( ".backtologin" ).click(function() {
+			console.log("form to register new user");
+			$(".loginform").show();
+			$(".registernewuser").show();
+			$(".form_newuser").hide();
+			$(".backtologin").hide();
+			
+		});
+
+		// Recover Password////////////////////////////////////////////////////////////////////////////
+		$( ".recoverpassword" ).click(function() {
+			console.log("form to recover password");
+			$(".loginform").hide();
+			$(".registernewuser").hide();
+			$(".form_newuser").hide();
+			$(".recoverpasswordform").show();
+			$(".backtologin").show();
+			$(".recoverpassword").hide();
 			
 		});
 
 
-		// Logout Delete Cookie
+		// Logout Delete Cookie////////////////////////////////////////////////////////////////////////////
 		$( ".logout" ).click(function() {
 			console.log("logout");
 			createCookie("loggedin","",-1)
@@ -629,7 +734,9 @@
 			$(".table-striped").remove();
 			$(".table").hide();
 			$(".editingorder").hide();
-			$(".formtoeditorders").hide();
+			$(".recoverpasswordform").hide();
+			$(".formtoeditorders").empty();
+			$(".recoverpassword").show();
 
 
 			// clearing results display
@@ -637,6 +744,9 @@
         	$( ".result_edit" ).empty();
 			$( ".result" ).empty();
 			$( ".result_creation" ).empty();
+			$( ".result_recoverpassword" ).empty();
+
+
 
 			
 
@@ -646,6 +756,8 @@
 			$(".loginform").show();
 			$(".divform").show();
 			$(".registernewuser").show();
+			$(".recoverpasswordform").hide();
+
 			
 
 			

@@ -17,7 +17,7 @@ if($_POST)
 
 	// $user="test";
 	// $email = "asdf@asdf.com";
-	// $pass="asdfadsfasdf";
+	// $pass="test";
 
 
 
@@ -27,7 +27,7 @@ $salt = 'Cf1213eParGlBJoOM0F6aJ';
 // Gera um hash baseado em bcrypt
 $hash = crypt($pass, '$2a$' . $custo . '$' . $salt . '$');
 
-
+// echo $hash;
 
 
 
