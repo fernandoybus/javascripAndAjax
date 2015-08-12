@@ -220,6 +220,10 @@
             			success: function (html) {
             			   console.log(html);
             			   var obj = JSON.parse(html);
+
+
+            			   //console.log("obj[0].order:" . obj[1].order);
+
             			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
             			   for(var i in obj)
 							{
@@ -246,6 +250,14 @@
 							$( ".table" ).append(table);
 							$( ".neworder" ).toggle();
 							$(".recoverpassword").hide();
+
+
+							// clearing results display
+				        	$( ".result_delete" ).empty();
+				        	$( ".result_edit" ).empty();
+							$( ".result" ).empty();
+							$( ".result_creation" ).empty();
+							$( ".result_recoverpassword" ).empty();
 
 							
 
@@ -330,6 +342,13 @@
 							$( ".table" ).toggle();
 							$( ".table" ).append(table);
 							$( ".neworder" ).toggle();
+
+							// clearing results display
+				        	$( ".result_delete" ).empty();
+				        	$( ".result_edit" ).empty();
+							$( ".result" ).empty();
+							$( ".result_creation" ).empty();
+							$( ".result_recoverpassword" ).empty();
 
 							// SET COOKIES
 							createCookie("loggedin",user,10);
@@ -423,19 +442,20 @@
 
             			   
 		            			   var obj = JSON.parse(html);
+
 		            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
 		            			   for(var i in obj)
 									{
 										 var id = obj[i].id;
 									     var order = obj[i].ordername;
-									     //console.log(order);
+									     console.log("Order from json: " . order);
 									     var user = obj[i].user;
 									     var items = obj[i].items;
 									     //console.log(user);
 
 									     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" + "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
 									}
-									//console.log(obj[1].order);
+									
 
 
 									$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
@@ -543,6 +563,8 @@
         	$( ".result_edit" ).empty();
 			$( ".result" ).empty();
 			$( ".result_creation" ).empty();
+			$( ".result_recoverpassword" ).empty();
+			
 
              console.log($('form').serialize());
              var userfromform = $(".usernameorder").val();
@@ -634,8 +656,6 @@
        	    console.log("getting password to send by email....");
         	console.log($(new FormData(this)));
 
-			var fu1 = document.getElementById("fileToUpload");
-			console.log("You selected " + fu1.value);
 
              e.preventDefault();
 
@@ -652,14 +672,14 @@
              var userfromform = $(".usernameorder").val();
              console.log(userfromform);
              // console.log("The user is: " userfromform);
+             var email_recover = "emailrecover=" + $(".emailrecover").val();
+             console.log(email_recover);
+
 
           $.ajax({
             type: 'post',
             url: 'recoverpassword.php',
-            data: new FormData(this),
-            contentType: false,
-			cache: false,
-			processData:false,
+            data: email_recover,
             success: function () {
               $( ".result_creation" ).empty();
               $( ".result_recoverpassword" ).append("<strong>Password sent to your email.</strong>");

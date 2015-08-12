@@ -10,8 +10,8 @@ $emailrecover="";
 
 if($_POST)
 {
-	$emailrecover=$_POST['emailrecover'];
-	$passwordnew=$_POST['passwordnew'];
+    $emailrecover=$_POST['emailrecover'];
+    $passwordnew=$_POST['passwordnew'];
 
 }
 
@@ -23,8 +23,8 @@ $con = mysql_connect($server, $username, $password) or die ("Could not connect: 
 mysql_select_db($database, $con);
 
 
-	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-	mysql_select_db($database, $con);
+    $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+    mysql_select_db($database, $con);
 
          $found =0;
          $sql = "SELECT retrievepassword FROM users where email LIKE '" .  $emailrecover . "'";
@@ -40,32 +40,33 @@ mysql_select_db($database, $con);
     
          }
 
-         mysql_close($con);
 
-          if ($found == 0){
+
+          if ($found === 0){
             echo '{"response":"0", "msg": "' .  "error" . '"}';
          }
 
-         if ($found != ""){
+         if ($found == 1){
 
 
 
-         	$custo = '08';
-			$salt = 'Cf1213eParGlBJoOM0F6aJ';
-			// Gera um hash baseado em bcrypt
-			$hash = crypt($passwordnew , '$2a$' . $custo . '$' . $salt . '$');
+                    $custo = '08';
+            $salt = 'Cf1213eParGlBJoOM0F6aJ';
+            // Gera um hash baseado em bcrypt
+            $hash = crypt($passwordnew , '$2a$' . $custo . '$' . $salt . '$');
 
 
-	 	 	$sql = "UPDATE users SET password='$hash', WHERE email='$emailrecover'";
+            $sql = "UPDATE users SET password='" . $hash . "' WHERE email LIKE '" .$emailrecover . "'";
+            //echo $sql;
 
             $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
-            echo '{"response":"0", "msg": "' .  "1" . '"}';
+            echo '1';
           }
 
 
 
-
+         mysql_close($con);
 
 
 ?>
