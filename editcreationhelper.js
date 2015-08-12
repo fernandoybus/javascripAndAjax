@@ -14,6 +14,15 @@
 
 
 
+    // CANCEL ORDER EDITION ////////////////////////////////////////////////////////
+    $( ".cancelorderedition" ).click(function() {
+      console.log("cancel order edition");
+      $(".editingorder").empty();
+      
+      
+    });
+
+
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//PREPARE SCRIPT to SAVE CHANGES ON ORDER THAT IS BEING ON EDITION
        $('.editingorder').on('submit', function (e) {

@@ -150,7 +150,7 @@
 
                         form = form + items; 
 
-                        form = form + '</div><div class="additemonedition" style="cursor: pointer"><p>Add an Item</p></div>' +'<br><input type="file" name="fileToUpload" id="fileToUpload"/><br><br><input name="submit" type="submit" value="Save Changes" class="btn btn-primary"></form>';
+                        form = form + '</div><div class="additemonedition" style="cursor: pointer"><p>Add an Item</p></div>' +'<br><input type="file" name="fileToUpload" id="fileToUpload"/><br><br><input name="submit" type="submit" value="Save Changes" class="btn btn-primary">  <button type="button" class="btn btn-warning cancelorderedition">Cancel Order Edit</button></form>';
 
                                 
                    }
