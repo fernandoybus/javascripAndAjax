@@ -10,7 +10,7 @@
              console.log(userfromform);
 
 
-             var deleteid = "deleteid=" + $(this).attr('id');
+             var deleteid = "deleteid=" + $(this).attr('id') + '&user=' + userfromform;
              console.log(deleteid);
              // console.log("The user is: " userfromform);
 
@@ -45,7 +45,7 @@
 							          var user = obj[i].user;
 							          var items = obj[i].items;
 							          //console.log(user);
-							          table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							          table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + readCookie("hashjaybus") +  "'>View</button></div></td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + readCookie("hashjaybus") + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus") + "'>Delete</button></div>" +  "</td></tr>";
 							     }
 
 
@@ -129,7 +129,7 @@
 
               // Create Form to edit order
               var obj = JSON.parse(html);
-              var form = "<form enctype='multipart/form-data' class='editingorder' style='border:1px solid #ccc';width:100px; padding: 10px 10px; margin:10px 10px;>";
+              var form = "<form enctype='multipart/form-data' class='editingorder' style='border:1px solid #ccc;padding:5px;';width:100px; padding: 10px 10px; margin:10px 10px;>";
               for(var i in obj)
                      {
                         var id = obj[i].id;
@@ -138,7 +138,7 @@
                         var user = obj[i].user;
                         var items = obj[i].items;
                         console.log(order);
-                        form = form + 'EDITING EXISTING ORDER:<br><input type="text" value="' + user + '" class="usernameorder" name="usernameorder" hidden required >' + '<input type="text" value="' + id + '" class="id" name="id" hidden required >' + 'Order:<br><input type="text" value="' + order + '" class="ordername" name="ordername" required ><br><div class="item">';
+                        form = form + 'EDITING EXISTING ORDER:<br><input type="text" value="' +  readCookie("hashjaybus") + '" class="usernameorder" name="usernameorder"  required >' + '<input type="text" value="' + id + '" class="id" name="id" hidden required >' + 'Order:<br><input type="text" value="' + order + '" class="ordername" name="ordername" required ><br><div class="item">';
                         var array = items.split(',');
 
                         var arrayLength = array.length;

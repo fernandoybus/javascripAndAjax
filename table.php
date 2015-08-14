@@ -12,7 +12,8 @@ if($_POST)
 }
 
 
-//echo $username; 
+
+//echo $user; 
 
 
 $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
@@ -22,12 +23,21 @@ mysql_select_db($database, $con);
 
 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
 	mysql_select_db($database, $con);
-	//SELECT * FROM `users` WHERE `username` LIKE 'fernandoybus' AND `password` LIKE 'test'
+
+        $sql = "SELECT username FROM users where cookie LIKE '" .  $user . "'";
+        $result = mysql_query($sql) or die ("Query error: " . mysql_error());
+         while($row = mysql_fetch_array($result)) {
+              
+             $user = $row[0];
+
+          }
+
+
+
+	
          $sql = "SELECT * FROM orders where user LIKE '" .  $user . "'";
          //echo $sql;
          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
-
-         $table= "<table><th>User</th><th>Order no</th>";
          while($row = mysql_fetch_array($result)) {
               
              $rows[] = $row;
@@ -42,7 +52,6 @@ mysql_select_db($database, $con);
 
          $table2 = json_encode($rows);
 
-         $table =  $table . "</table>";
          //echo $table;
          if ($found == ""){
           	echo '{"response":"0", "table":"0"}';

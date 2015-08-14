@@ -117,8 +117,16 @@ mysql_select_db($database, $con);
 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
 	mysql_select_db($database, $con);
 
-		if ($image != null || $image != ""){
-	     $sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
+
+	    $sql0 = "SELECT username FROM users where cookie LIKE '" .  $usernameorder . "'";
+        $result0 = mysql_query($sql0) or die ("Query error: " . mysql_error());
+        while($row0 = mysql_fetch_array($result0)) {
+            $usernameorder = $row0[0];
+
+		}
+
+		 if ($image != null || $image != ""){
+	     	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
 	 	 }
 	 	 else{
 	 	 	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";

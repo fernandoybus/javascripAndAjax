@@ -17,7 +17,7 @@
     // CANCEL ORDER EDITION ////////////////////////////////////////////////////////
     $( ".cancelorderedition" ).click(function() {
       console.log("cancel order edition");
-      $(".editingorder").empty();
+    $(".editingorder").empty();
       
       
     });
@@ -37,9 +37,9 @@
 
              // clearing results display
             $( ".result_delete" ).empty();
-        	$( ".result_edit" ).empty();
-			$( ".result" ).empty();
-			$( ".result_creation" ).empty();
+        	  $( ".result_edit" ).empty();
+			      $( ".result" ).empty();
+			      $( ".result_creation" ).empty();
 
              console.log($('form').serialize());
              var userfromform = $(".usernameorder").val();
@@ -81,7 +81,7 @@
 							     var user = obj[i].user;
 							     var items = obj[i].items;
 							     console.log(items);
-							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items  +  "</td><td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + "'>View</button></div></td>" +  "<td><div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items  +  "</td><td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + readCookie("hashjaybus")  + "'>View</button></div></td>" +  "<td><div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id  + readCookie("hashjaybus")  + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus")  + "'>Delete</button></div>" +  "</td></tr>";
 							}
 
 
