@@ -97,7 +97,8 @@
 							$( ".table" ).show();
 							$( ".table" ).append(table);
 							$( ".neworder" ).show();
-							$( ".editingorder" ).empty();
+							$(".editingorder").hide();
+              $(".editingorder").empty();
 
             			}
             		});

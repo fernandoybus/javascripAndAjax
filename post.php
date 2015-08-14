@@ -9,9 +9,9 @@ $order="test ";
 
 if($_POST)
 {
-	$usernameorder=$_POST['usernameorder'];
-	$order=$_POST['order'];
-	$items=$_POST['item'];
+	$usernameorder=sanitize($_POST['usernameorder']);
+	$order=sanitize($_POST['order']);
+	$items=sanitize($_POST['item']);
 
 
 

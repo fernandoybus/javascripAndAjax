@@ -6,7 +6,7 @@ include 'credentials.php';
 
 if($_POST)
 {
-	$id=$_POST['editid'];
+	$id=sanitize($_POST['editid']);
 
 
 

@@ -10,8 +10,8 @@ $emailrecover="";
 
 if($_POST)
 {
-    $emailrecover=$_POST['emailrecover'];
-    $passwordnew=$_POST['passwordnew'];
+    $emailrecover=sanitize($_POST['emailrecover']);
+    $passwordnew=sanitize($_POST['passwordnew']);
 
 }
 

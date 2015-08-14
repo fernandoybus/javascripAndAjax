@@ -10,7 +10,8 @@ $deleteid="";
 
 if($_POST)
 {
-	$deleteid=$_POST['deleteid'];
+	$deleteid=sanitize($_POST['deleteid']);
+	$user=sanitize($_POST['user']);
 
 }
 

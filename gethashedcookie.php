@@ -5,7 +5,7 @@ include 'credentials.php';
 
 if($_POST)
 {
-	$name=$_POST['name'];
+	$name=sanitize($_POST['name']);
 
 }
 

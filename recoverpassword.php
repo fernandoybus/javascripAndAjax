@@ -9,7 +9,7 @@ $email="";
 
 if($_GET['emailrecover'])
 {
-    $email=$_GET['emailrecover'];
+    $email=sanitize($_GET['emailrecover']);
 
 
 

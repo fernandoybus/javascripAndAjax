@@ -12,10 +12,10 @@ $id="";
 
 if($_POST)
 {
-	$usernameorder=$_POST['usernameorder'];
-	$id = $_POST['id'];
-	$order=$_POST['ordername'];
-	$items=$_POST['item'];
+	$usernameorder=sanitize($_POST['usernameorder']);
+	$id = sanitize($_POST['id']);
+	$order=sanitize($_POST['ordername']);
+	$items=sanitize($_POST['item']);
 
 
 
