@@ -17,6 +17,7 @@
     // CANCEL ORDER EDITION ////////////////////////////////////////////////////////
     $( ".cancelorderedition" ).click(function() {
       console.log("cancel order edition");
+    $(".editingorder").hide();
     $(".editingorder").empty();
       
       
