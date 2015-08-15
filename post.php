@@ -4,14 +4,15 @@ include 'credentials.php';
 
 
 
-$usernameorder=" test";
-$order="test ";
+$usernameorder="";
+$order=" ";
+$items="";
 
 if($_POST)
 {
-	$usernameorder=sanitize($_POST['usernameorder']);
-	$order=sanitize($_POST['order']);
-	$items=sanitize($_POST['item']);
+	$usernameorder=($_POST['usernameorder']);
+	$order=($_POST['order']);
+	$items=($_POST['item']);
 
 
 
@@ -52,10 +53,10 @@ if($_POST)
 		if(isset($_POST["submit"])) {
 		    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 		    if($check !== false) {
-		        echo "File is an image - " . $check["mime"] . ".";
+		        //echo "File is an image - " . $check["mime"] . ".";
 		        $uploadOk = 1;
 		    } else {
-		        echo "File is not an image.";
+		        //echo "File is not an image.";
 		        $uploadOk = 0;
 		    }
 		}
@@ -110,6 +111,7 @@ mysql_select_db($database, $con);
          $sql = "INSERT INTO orders (user, ordername, items, image) VALUES('$usernameorder', '$order', '$comma_separated', '$image')";
          //echo $sql;
          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
+         echo $result;
 
 mysql_close($con);
 

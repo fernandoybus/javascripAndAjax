@@ -166,9 +166,9 @@
     <script>
 
 
-//TODO: create hashed cookie to check if user has authenticated on CRUD operation requests
+
 //TODO: JOIN Table for items
-//TODO:
+//TODO: PREPARE STATEMENTS
 
 
 
@@ -640,7 +640,8 @@
             contentType: false,
 			cache: false,
 			processData:false,
-            success: function () {
+            success: function (html) {
+              console.log(html);
               $( ".result_creation" ).empty();
               $( ".result_creation" ).append("<strong>New Order Saved</strong>");
               $( ".order" ).val( "" );

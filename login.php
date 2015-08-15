@@ -5,8 +5,8 @@ include 'credentials.php';
 
 if($_POST)
 {
-	$user=sanitize($_POST['username']);
-	$pass=sanitize($_POST['password']);
+	$user=htmlspecialchars($_POST['username']);
+	$pass=htmlspecialchars($_POST['password']);
 
 
 

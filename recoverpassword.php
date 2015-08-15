@@ -7,14 +7,16 @@ include 'credentials.php';
 $email="";
 
 
-if($_GET['emailrecover'])
+if($_POST['emailrecover'])
 {
-    $email=sanitize($_GET['emailrecover']);
+    $email=($_POST['emailrecover']);
 
 
 
 }
 
+
+//echo $email;
 
 
 
@@ -60,13 +62,18 @@ mysql_select_db($database, $con);
                         //echo "<br>";
                         //echo $hash;
 
+            //echo $hash;
 
             $sql = "UPDATE users SET retrievepassword= '" . $hash ."' WHERE email LIKE '" . $email . "'";
                         //echo $sql;
 
                         $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
-                        $email = str_replace("@","%40",$email);
+                        $email = str_replace("%40","@",$email);
+
+                    echo $email;
+                    
+
             
                     mail($email,"Password Recovery from Javascript/Ajax System by Y-bus","Click on link to create new password: http://deeplook.com.br/js_ajax_crud/resetpassword.php?token=" . $hash . "&email=" . $email);
 
