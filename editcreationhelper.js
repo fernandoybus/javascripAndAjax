@@ -43,7 +43,7 @@
 			      $( ".result_creation" ).empty();
 
              console.log($('form').serialize());
-             var userfromform = $(".usernameorder").val();
+             var userfromform = $(".hashnameorder").val();
              //console.log(userfromform);
              var idfromform = $(".id").val();
              // console.log(idfromform);

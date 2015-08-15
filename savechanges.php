@@ -13,10 +13,11 @@ $id="";
 if($_POST)
 {
 	//$usernameorder=sanitize($_POST['usernameorder']);
-	$usernameorder=($_POST['usernameorder']);
-	$id = sanitize($_POST['id']);
-	$order=sanitize($_POST['ordername']);
-	$items=sanitize($_POST['item']);
+	$usernameorder=($_POST['hashnameorder']);
+	$id = ($_POST['id']);
+	$order=($_POST['ordername']);
+	$items=($_POST['item']);
+
 
 
 

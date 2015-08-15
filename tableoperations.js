@@ -7,7 +7,7 @@
              console.log("Deleting item...");
 
              var userfromform = $(".usernameorder").val();
-             console.log(userfromform);
+             console.log("usernameorder: " +userfromform);
 
 
              var deleteid = "deleteid=" + $(this).attr('id') + '&user=' + userfromform;
@@ -107,7 +107,7 @@
              $( ".singleitem" ).remove();
 
              var userfromform = $(".usernameorder").val();
-             console.log(userfromform);
+             console.log("usernameorder: " + userfromform);
 
 
              var editid = "editid=" + $(this).attr('id');
@@ -138,7 +138,7 @@
                         var user = obj[i].user;
                         var items = obj[i].items;
                         console.log(order);
-                        form = form + 'EDITING EXISTING ORDER:<br><input style="display:none;" type="text" value="' +  readCookie("hashjaybus") + '" class="usernameorder" name="usernameorder" required hidden >' + '<input type="text" value="' + id + '" class="id" name="id" hidden required >' + 'Order:<br><input type="text" value="' + order + '" class="ordername" name="ordername" required ><br><div class="item">';
+                        form = form + 'EDITING EXISTING ORDER:<br><input style="display:none;" type="text" value="' +  readCookie("hashjaybus") + '" class="hashnameorder" name="hashnameorder" required hidden ><input style="display:none;" type="text" value="' +  readCookie("userjaybus") + '" class="usernameorder" name="usernameorder" required hidden >' + '<input type="text" value="' + id + '" class="id" name="id" hidden required >' + 'Order:<br><input type="text" value="' + order + '" class="ordername" name="ordername" required ><br><div class="item">';
                         var array = items.split(',');
 
                         var arrayLength = array.length;

@@ -89,6 +89,7 @@
 			CREATE NEW ORDER:
 			<br>
 			<input type="text" name="usernameorder" class="usernameorder" hidden required >
+			<input type="text" name="hashnameorder" class="hashnameorder" hidden required >
 			Order:<br>
 			<input type="text" name="order" class="order" required value=""><br>
 			Item:<br>
@@ -262,7 +263,8 @@
 
 								var usardata = "username=" + readCookie('userjaybus');
 
-								$(".usernameorder").val(cookie); // get it ready to pass username to save functions...
+								$(".usernameorder").val(readCookie('userjaybus'));
+								$(".hashnameorder").val(readCookie('hashjaybus')); // get it ready to pass username to save functions...
 					    		$.ajax({
 				            			type: 'post',
 				            			url: 'table.php',
