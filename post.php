@@ -100,20 +100,51 @@ foreach ($_FILES["images"]["error"] as $key => $error) {
 }
 
 
+//////////////////////////////////////////////////////
 
 
-$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-mysql_select_db($database, $con);
+// $usernameorder="t";
+// $order="t";
+// $items="t";
+// $image="t";
 
 
-	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-	mysql_select_db($database, $con);
-         $sql = "INSERT INTO orders (user, ordername, items, image) VALUES('$usernameorder', '$order', '$comma_separated', '$image')";
-         //echo $sql;
-         $result = mysql_query($sql) or die ("Query error: " . mysql_error());
-         echo $result;
+// Create connection
+$conn = new mysqli($server, $username, $password, $database);
 
-mysql_close($con);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// prepare and bind
+$stmt = $conn->prepare("INSERT INTO orders (user, ordername, items, image) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $usernameorder, $order, $comma_separated, $image);
+
+
+$stmt->execute();
+
+
+echo "New records created successfully";
+
+$stmt->close();
+$conn->close();
+
+   ///////////////////////////////////
+
+
+// $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+// mysql_select_db($database, $con);
+
+
+// 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+// 	mysql_select_db($database, $con);
+//          $sql = "INSERT INTO orders (user, ordername, items, image) VALUES('$usernameorder', '$order', '$comma_separated', '$image')";
+// 		 //echo $sql;
+//          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
+//          echo $result;
+
+// mysql_close($con);
 
 
 

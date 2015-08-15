@@ -199,6 +199,7 @@
 					    console.log('loggedin=' + value + '; hash=' + cookievalue+expires+"; path=/");
 					    //document.cookie = 'loggedin=' + value + '; hash=' + cookievalue+expires+"; path=/";
 					    document.cookie = 'hashjaybus=' + cookievalue+expires+"; path=/";
+					    document.cookie = 'userjaybus=' + value+expires+"; path=/";
 					    
 
 
@@ -241,64 +242,79 @@
 	    		$('.registernewuser').hide();
 	    		$('.logout').show();
 
+
+
+                console.log ("USER JUST LOGGED IN, LET'S SET COOKIES");
+				// SET COOKIES
+				createCookie("loggedin",readCookie('userjaybus'),10);
+
+				console.log("userjaybus: " + readCookie('userjaybus'));
+
+
+				// WAIT TO READ COOKIES FROM AJAX CALL TO CREATE COOKIES
+
+				//TODO: REDO THIS LOGIC
+
+				setTimeout(function(){
+				    console.log("Wait 1 seconds");
 	    		
 	    		
 
-				var usardata = "username=" + cookie;
+								var usardata = "username=" + readCookie('userjaybus');
 
-				$(".usernameorder").val(cookie); // get it ready to pass username to save functions...
-	    		$.ajax({
-            			type: 'post',
-            			url: 'table.php',
-            			data: usardata,
-            			success: function (html) {
-            			   console.log(html);
-            			   var obj = JSON.parse(html);
-
-
-            			   //console.log("obj[0].order:" . obj[1].order);
-
-            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
-            			   for(var i in obj)
-							{
-								 var id = obj[i].id;
-							     var order = obj[i].ordername;
-							     //console.log(order);
-							     var user = obj[i].user;
-							     var items = obj[i].items;
-							     //console.log(user);
-
-							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + readCookie("hashjaybus") +  "'>View</button></div></td>" + "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + readCookie("hashjaybus") + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus") + "'>Delete</button></div>" +  "</td></tr>";
-							}
-							//console.log(obj[1].order);
+								$(".usernameorder").val(cookie); // get it ready to pass username to save functions...
+					    		$.ajax({
+				            			type: 'post',
+				            			url: 'table.php',
+				            			data: usardata,
+				            			success: function (html) {
+				            			   console.log(html);
+				            			   var obj = JSON.parse(html);
 
 
-							$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
+				            			   //console.log("obj[0].order:" . obj[1].order);
 
-								  console.log( "Load was performed." );
-								});
+				            			   var table = "<table class='table table-striped'><th>User</th><th>Order no</th><th>Items</th><th>View</th><th>Edit</th><th>Delete</th>";
+				            			   for(var i in obj)
+											{
+												 var id = obj[i].id;
+											     var order = obj[i].ordername;
+											     //console.log(order);
+											     var user = obj[i].user;
+											     var items = obj[i].items;
+											     //console.log(user);
 
-						
-						
-							$( ".table" ).toggle();
-							$( ".table" ).append(table);
-							$( ".neworder" ).toggle();
-							$(".recoverpassword").hide();
-
-
-							// clearing results display
-				        	$( ".result_delete" ).empty();
-				        	$( ".result_edit" ).empty();
-							$( ".result" ).empty();
-							$( ".result_creation" ).empty();
-							$( ".result_recoverpassword" ).empty();
-
-							
+											     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + readCookie("hashjaybus") +  "'>View</button></div></td>" + "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + readCookie("hashjaybus") + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus") + "'>Delete</button></div>" +  "</td></tr>";
+											}
+											//console.log(obj[1].order);
 
 
-            			}
-            		});
+											$.getScript( "tableoperations.js", function( data, textStatus, jqxhr ) {
 
+												  console.log( "Load was performed." );
+												});
+
+										
+										
+											$( ".table" ).toggle();
+											$( ".table" ).append(table);
+											$( ".neworder" ).toggle();
+											$(".recoverpassword").hide();
+
+
+											// clearing results display
+								        	$( ".result_delete" ).empty();
+								        	$( ".result_edit" ).empty();
+											$( ".result" ).empty();
+											$( ".result_creation" ).empty();
+											$( ".result_recoverpassword" ).empty();
+
+											
+
+
+				            			}
+				            	});
+                    }, 1000);
 	    		
 	    	}
 		});
