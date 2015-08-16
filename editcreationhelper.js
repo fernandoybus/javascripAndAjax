@@ -50,7 +50,7 @@
              var orderfromform = $(".order").val();
              // console.log(orderfromform);
              var items = $(".items").val();
-             console.log(items);
+             //console.log(items);
 
 
 
@@ -61,15 +61,24 @@
             contentType: false,
             cache: false,
             processData:false,
-            success: function () {
+            success: function (html) {
+              console.log(html);
+              // var obj = JSON.parse(html);
+              // console.log("response: " + obj);
+
               $( ".result_edit" ).empty();
               $( ".result_edit" ).append("<strong>Changes on Order Saved</strong>");
               // REDO TABLE TO VIEW RESULTS
-                     $( ".table" ).empty();
-                     $.ajax({
+              $( ".table" ).empty();
+
+
+              var usardata = "username=" + readCookie('userjaybus') + '&hash=' + readCookie('hashjaybus');
+              console.log(usardata);
+
+              $.ajax({
             			type: 'post',
             			url: 'table.php',
-            			data: "username=" + userfromform,
+            			data: usardata,
             			success: function (html) {
             			   console.log(html);
             			   var obj = JSON.parse(html);
@@ -82,7 +91,7 @@
 							     var user = obj[i].user;
 							     var items = obj[i].items;
 							     console.log(items);
-							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items  +  "</td><td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + readCookie("hashjaybus")  + "'>View</button></div></td>" +  "<td><div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id  + readCookie("hashjaybus")  + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus")  + "'>Delete</button></div>" +  "</td></tr>";
+							     table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items  +  "</td><td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id  + "'>View</button></div></td>" +  "<td><div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id  + readCookie("hashjaybus")  + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus")  + "'>Delete</button></div>" +  "</td></tr>";
 							}
 
 

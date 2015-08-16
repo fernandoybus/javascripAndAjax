@@ -10,7 +10,8 @@
              console.log("usernameorder: " +userfromform);
 
 
-             var deleteid = "deleteid=" + $(this).attr('id') + '&user=' + userfromform;
+
+             var deleteid = "deleteid=" + $(this).attr('id') + "&username=" + readCookie('userjaybus') + '&hash=' + readCookie('hashjaybus') ;
              console.log(deleteid);
              // console.log("The user is: " userfromform);
 
@@ -27,12 +28,14 @@
               $( ".result_delete" ).empty();
               $( ".result_delete" ).append("<strong>Order Deleted</strong>");
 
+              var usardata = "username=" + readCookie('userjaybus') + '&hash=' + readCookie('hashjaybus');
+
               // REDO TABLE TO VIEW RESULTS
                      $( ".table" ).empty();
                      $.ajax({
             			type: 'post',
             			url: 'table.php',
-            			data: "username=" + userfromform,
+            			data: usardata,
             			success: function (html) {
             			   console.log(html);
             			   var obj = JSON.parse(html);
@@ -45,7 +48,7 @@
 							          var user = obj[i].user;
 							          var items = obj[i].items;
 							          //console.log(user);
-							          table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id + readCookie("hashjaybus") +  "'>View</button></div></td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id + readCookie("hashjaybus") + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + readCookie("hashjaybus") + "'>Delete</button></div>" +  "</td></tr>";
+							          table = table + "<tr><td>" + user +  "</td>" +  "<td>" +  order +  "</td>" +  "<td>" +  items +  "</td>" + "<td><div class='view'><button type='button' class='btn btn-primary viewitem' id='" + id  +  "'>View</button></div></td>" +  "<td>" + "<div class='edit'><button type='button' class='btn btn-warning edititem' id='" + id  + "'>Edit</button></div>" +  "</td>" +  "<td>" + "<div class='delete'><button type='button' class='btn btn-danger deleteitem' id='" + id + "'>Delete</button></div>" +  "</td></tr>";
 							     }
 
 
@@ -101,6 +104,7 @@
        $( ".edititem" ).click(function() {
 
              console.log("Editing item...");
+             console.log($(this).attr('id'));
 
 
              // cleaning any other items from the past
@@ -110,7 +114,7 @@
              console.log("usernameorder: " + userfromform);
 
 
-             var editid = "editid=" + $(this).attr('id');
+             var editid = "editid=" + $(this).attr('id') + "&username=" + readCookie('userjaybus') + '&hash=' + readCookie('hashjaybus') ;
              console.log(editid);
 
 
@@ -122,9 +126,9 @@
             url: 'getordertoedit.php',
             data: editid,
             success: function (html) {
-              var $html = html;
+              var html = html;
               console.log(html); 
-              console.log(editid);
+              //console.log(editid);
    
 
               // Create Form to edit order
@@ -133,14 +137,25 @@
               for(var i in obj)
                      {
                         var id = obj[i].id;
+                        console.log(id);
                         var order = obj[i].ordername;
                         //console.log(order);
                         var user = obj[i].user;
                         var items = obj[i].items;
-                        console.log(order);
+                        //console.log(order);
                         form = form + 'EDITING EXISTING ORDER:<br><input style="display:none;" type="text" value="' +  readCookie("hashjaybus") + '" class="hashnameorder" name="hashnameorder" required hidden ><input style="display:none;" type="text" value="' +  readCookie("userjaybus") + '" class="usernameorder" name="usernameorder" required hidden >' + '<input type="text" value="' + id + '" class="id" name="id" hidden required >' + 'Order:<br><input type="text" value="' + order + '" class="ordername" name="ordername" required ><br><div class="item">';
-                        var array = items.split(',');
 
+
+                        if (items.indexOf(",") >= 0){
+                             var array = items.split(',');
+                        }else{
+                            var array = items.split(',');
+                        }
+                        // if (umitem == -1){
+                        //     var array[0] = items;
+                        // }else{
+                        //      var array = items.split(',');
+                        // }
                         var arrayLength = array.length;
                         var items ="";
                         for (var i = 0; i < arrayLength; i++) {
@@ -211,7 +226,8 @@
              console.log(userfromform);
 
 
-             var viewid = "editid=" + $(this).attr('id');
+
+             var viewid = "editid=" + $(this).attr('id') + "&username=" + readCookie('userjaybus') + '&hash=' + readCookie('hashjaybus') ;
              console.log(viewid);
 
 
@@ -223,7 +239,7 @@
             url: 'getordertoedit.php',
             data: viewid,
             success: function (html) {
-              var $html = html;
+              var html = html;
               console.log(html); 
               console.log(viewid);
    

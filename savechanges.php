@@ -4,7 +4,8 @@
 include 'credentials.php';
 
 $usernameorder="";
-$order = "";
+$hashnameorder="";
+$ordername = "";
 $items = "";
 $id="";
 
@@ -13,13 +14,14 @@ $id="";
 if($_POST)
 {
 	//$usernameorder=sanitize($_POST['usernameorder']);
-	$usernameorder=($_POST['hashnameorder']);
-	$id = ($_POST['id']);
-	$order=($_POST['ordername']);
+	$usernameorder=htmlspecialchars($_POST['usernameorder']);
+	$hashnameorder=htmlspecialchars($_POST['hashnameorder']);
+	$id = htmlspecialchars($_POST['id']);
+	$ordername=htmlspecialchars($_POST['ordername']);
 	$items=($_POST['item']);
 
 
-
+echo '{"response":"' . $usernameorder . " - " . $hashnameorder . " - " . $id . " - " . $ordername . " - " . $items . '"}';
 
 	$comma_separated = implode(",", $items);
 
@@ -61,10 +63,10 @@ if($_POST)
 		if(isset($_POST["submit"])) {
 		    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 		    if($check !== false) {
-		        echo "File is an image - " . $check["mime"] . ".";
+		        //echo "File is an image - " . $check["mime"] . ".";
 		        $uploadOk = 1;
 		    } else {
-		        echo "File is not an image.";
+		        //echo "File is not an image.";
 		        $uploadOk = 0;
 		    }
 		}
@@ -111,32 +113,105 @@ foreach ($_FILES["images"]["error"] as $key => $error) {
 }
 
 
-
-$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-mysql_select_db($database, $con);
-
-
-	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-	mysql_select_db($database, $con);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MSQLI & PREPARE
 
 
-	    $sql0 = "SELECT username FROM users where cookie LIKE '" .  $usernameorder . "'";
-        $result0 = mysql_query($sql0) or die ("Query error: " . mysql_error());
-        while($row0 = mysql_fetch_array($result0)) {
-            $usernameorder = $row0[0];
+$found = "";
 
-		}
+$mysqli = new mysqli($server, $username, $password, $database);
 
-		 if ($image != null || $image != ""){
-	     	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+
+/* create a prepared statement */
+if ($stmt = $mysqli->prepare("SELECT id FROM users WHERE username=? AND cookie=?")) {
+
+    /* bind parameters for markers */
+    $stmt->bind_param("ss", $usernameorder, $hashnameorder);
+
+    /* execute query */
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+
+
+    /* now you can fetch the results into an array - NICE */
+    while ($myrow = $result->fetch_assoc()) {
+
+
+         if ($image != null || $image != ""){
+
+	     	//$sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
+	     	//$sql = "UPDATE orders SET ordername=?, items=?, image=? WHERE id=? AND user =?";
+	        if ($stmt2 = $mysqli->prepare("UPDATE orders SET ordername=?, items=?, image=? WHERE id=? AND user =?")) {
+	              $stmt2->bind_param("sssss", $ordername, $comma_separated,  $image, $id ,$usernameorder);
+	              $stmt2->execute();
+	              $found =1;
+	        }
 	 	 }
 	 	 else{
-	 	 	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
-	 	 }
-         //echo $sql;
-         $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
-mysql_close($con);
+	 	 	//$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
+	 	 	//$sql = "UPDATE orders SET ordername=?, items=? WHERE id=? AND user = ?";
+	        if ($stmt2 = $mysqli->prepare("UPDATE orders SET ordername=?, items=? WHERE id=? AND user = ?")) {
+		              $stmt2->bind_param("ssss", $ordername, $comma_separated, $id ,$usernameorder);
+		              $stmt2->execute();
+		              $found =1;
+		        }
+	 	 }
+
+
+    }
+
+    /* close statement */
+    $stmt->close();
+}
+
+/* close connection */
+$mysqli->close();
+
+
+              //echo $table;
+              if ($found == ""){
+                 echo '{"response":"0", "table":"0"}';
+              }else{
+                  echo "1";
+              }
+
+
+
+
+// $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+// mysql_select_db($database, $con);
+
+
+// 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+// 	mysql_select_db($database, $con);
+
+
+// 	    $sql0 = "SELECT username FROM users where cookie LIKE '" .  $usernameorder . "'";
+//         $result0 = mysql_query($sql0) or die ("Query error: " . mysql_error());
+//         while($row0 = mysql_fetch_array($result0)) {
+//             $usernameorder = $row0[0];
+
+// 		}
+
+// 		 if ($image != null || $image != ""){
+// 	     	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
+// 	 	 }
+// 	 	 else{
+// 	 	 	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
+// 	 	 }
+//          //echo $sql;
+//          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
+
+// mysql_close($con);
 
 
 

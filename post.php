@@ -5,13 +5,15 @@ include 'credentials.php';
 
 
 $usernameorder="";
+$hashnameorder="";
 $order=" ";
 $items="";
 
 if($_POST)
 {
-	$usernameorder=($_POST['usernameorder']);
-	$order=($_POST['order']);
+	$usernameorder=htmlspecialchars($_POST['usernameorder']);
+	$hashnameorder=htmlspecialchars($_POST['hashnameorder']);
+	$order=htmlspecialchars($_POST['order']);
 	$items=($_POST['item']);
 
 
@@ -109,26 +111,77 @@ foreach ($_FILES["images"]["error"] as $key => $error) {
 // $image="t";
 
 
-// Create connection
-$conn = new mysqli($server, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+
+
+$found = "";
+
+$mysqli = new mysqli($server, $username, $password, $database);
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
 }
 
-// prepare and bind
-$stmt = $conn->prepare("INSERT INTO orders (user, ordername, items, image) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $usernameorder, $order, $comma_separated, $image);
+
+/* create a prepared statement */
+if ($stmt = $mysqli->prepare("SELECT id FROM users WHERE username=? AND cookie=?")) {
+
+    /* bind parameters for markers */
+    $stmt->bind_param("ss", $usernameorder, $hashnameorder);
+
+    /* execute query */
+    $stmt->execute();
+
+    $result = $stmt->get_result();
 
 
-$stmt->execute();
+
+    /* now you can fetch the results into an array - NICE */
+    while ($myrow = $result->fetch_assoc()) {
+
+        // use your $myrow array as you would with any other fetch
+        //printf("%s is in district %s\n", $city, $myrow['id']);
+
+        if ($stmt2 = $mysqli->prepare("INSERT INTO orders (user, ordername, items, image) VALUES(?, ?, ?, ?)")) {
 
 
-echo "New records created successfully";
+              $stmt2->bind_param("ssss", $usernameorder, $order, $comma_separated,  $image );
 
-$stmt->close();
-$conn->close();
+              // /* execute query */
+              $stmt2->execute();
+
+             
+              $found =1;
+
+
+
+
+
+
+        }
+
+
+    }
+
+    /* close statement */
+    $stmt->close();
+}
+
+/* close connection */
+$mysqli->close();
+
+
+              //echo $table;
+              if ($found == ""){
+                 echo '{"response":"0", "table":"0"}';
+              }else{
+                  echo "1";
+              }
+
+
+
 
    ///////////////////////////////////
 
