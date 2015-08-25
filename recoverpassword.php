@@ -71,7 +71,7 @@ mysql_select_db($database, $con);
 
                         $email = str_replace("%40","@",$email);
 
-                    echo $email;
+                    //echo $email;
                     
 
             
