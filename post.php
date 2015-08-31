@@ -94,7 +94,7 @@ if($_POST)
 
 
 
-foreach ($_FILES["images"]["error"] as $key => $error) {
+foreach($_FILES["images"]["error"] as $key => $error) {
   if ($error == UPLOAD_ERR_OK) {
     $name = $_FILES["images"]["name"][$key];
     move_uploaded_file( $_FILES["images"]["tmp_name"][$key], "uploads/" . $_FILES['images']['name'][$key]);
@@ -114,71 +114,71 @@ foreach ($_FILES["images"]["error"] as $key => $error) {
 
 
 
-$found = "";
+// $found = "";
 
-$mysqli = new mysqli($server, $username, $password, $database);
+// $mysqli = new mysqli($server, $username, $password, $database);
 
-/* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
-
-
-/* create a prepared statement */
-if ($stmt = $mysqli->prepare("SELECT id FROM users WHERE username=? AND cookie=?")) {
-
-    /* bind parameters for markers */
-    $stmt->bind_param("ss", $usernameorder, $hashnameorder);
-
-    /* execute query */
-    $stmt->execute();
-
-    $result = $stmt->get_result();
+// /* check connection */
+// if (mysqli_connect_errno()) {
+//     printf("Connect failed: %s\n", mysqli_connect_error());
+//     exit();
+// }
 
 
+// /* create a prepared statement */
+// if ($stmt = $mysqli->prepare("SELECT id FROM users WHERE username=? AND cookie=?")) {
 
-    /* now you can fetch the results into an array - NICE */
-    while ($myrow = $result->fetch_assoc()) {
+//     /* bind parameters for markers */
+//     $stmt->bind_param("ss", $usernameorder, $hashnameorder);
 
-        // use your $myrow array as you would with any other fetch
-        //printf("%s is in district %s\n", $city, $myrow['id']);
+//     /* execute query */
+//     $stmt->execute();
 
-        if ($stmt2 = $mysqli->prepare("INSERT INTO orders (user, ordername, items, image) VALUES(?, ?, ?, ?)")) {
+//     $result = $stmt->get_result();
 
 
-              $stmt2->bind_param("ssss", $usernameorder, $order, $comma_separated,  $image );
 
-              // /* execute query */
-              $stmt2->execute();
+//     /* now you can fetch the results into an array - NICE */
+//     while ($myrow = $result->fetch_assoc()) {
+
+//         // use your $myrow array as you would with any other fetch
+//         //printf("%s is in district %s\n", $city, $myrow['id']);
+
+//         if ($stmt2 = $mysqli->prepare("INSERT INTO orders (user, ordername, items, image) VALUES(?, ?, ?, ?)")) {
+
+
+//               $stmt2->bind_param("ssss", $usernameorder, $order, $comma_separated,  $image );
+
+//               // /* execute query */
+//               $stmt2->execute();
 
              
-              $found =1;
+//               $found =1;
 
 
 
 
 
 
-        }
+//         }
 
 
-    }
+//     }
 
-    /* close statement */
-    $stmt->close();
-}
+//     /* close statement */
+//     $stmt->close();
+// }
 
-/* close connection */
-$mysqli->close();
+// /* close connection */
+// $mysqli->close();
 
 
-              //echo $table;
-              if ($found == ""){
-                 echo '{"response":"0", "table":"0"}';
-              }else{
-                  echo "1";
-              }
+//               //echo $table;
+//               if ($found == ""){
+//                  echo '{"response":"0", "table":"0"}';
+//               }else{
+//                   echo "1";
+//               }
 
 
 
@@ -186,16 +186,16 @@ $mysqli->close();
    ///////////////////////////////////
 
 
-// $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-// mysql_select_db($database, $con);
+$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+mysql_select_db($database, $con);
 
 
-// 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-// 	mysql_select_db($database, $con);
-//          $sql = "INSERT INTO orders (user, ordername, items, image) VALUES('$usernameorder', '$order', '$comma_separated', '$image')";
-// 		 //echo $sql;
-//          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
-//          echo $result;
+	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+	mysql_select_db($database, $con);
+         $sql = "INSERT INTO orders (user, ordername, items, image) VALUES('$usernameorder', '$order', '$comma_separated', '$image')";
+		 //echo $sql;
+         $result = mysql_query($sql) or die ("Query error: " . mysql_error());
+         echo "1";
 
 // mysql_close($con);
 

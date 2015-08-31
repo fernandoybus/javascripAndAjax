@@ -113,105 +113,36 @@ foreach ($_FILES["images"]["error"] as $key => $error) {
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//MSQLI & PREPARE
-
-
-$found = "";
-
-$mysqli = new mysqli($server, $username, $password, $database);
-
-/* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
-
-
-/* create a prepared statement */
-if ($stmt = $mysqli->prepare("SELECT id FROM users WHERE username=? AND cookie=?")) {
-
-    /* bind parameters for markers */
-    $stmt->bind_param("ss", $usernameorder, $hashnameorder);
-
-    /* execute query */
-    $stmt->execute();
-
-    $result = $stmt->get_result();
 
 
 
-    /* now you can fetch the results into an array - NICE */
-    while ($myrow = $result->fetch_assoc()) {
 
 
-         if ($image != null || $image != ""){
+$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+mysql_select_db($database, $con);
 
-	     	//$sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
-	     	//$sql = "UPDATE orders SET ordername=?, items=?, image=? WHERE id=? AND user =?";
-	        if ($stmt2 = $mysqli->prepare("UPDATE orders SET ordername=?, items=?, image=? WHERE id=? AND user =?")) {
-	              $stmt2->bind_param("sssss", $ordername, $comma_separated,  $image, $id ,$usernameorder);
-	              $stmt2->execute();
-	              $found =1;
-	        }
+
+	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
+	mysql_select_db($database, $con);
+
+
+	    $sql0 = "SELECT username FROM users where cookie LIKE '" .  $usernameorder . "'";
+        $result0 = mysql_query($sql0) or die ("Query error: " . mysql_error());
+        while($row0 = mysql_fetch_array($result0)) {
+            $usernameorder = $row0[0];
+
+		}
+
+		 if ($image != null || $image != ""){
+	     	$sql = "UPDATE orders SET ordername='$ordername', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
 	 	 }
 	 	 else{
-
-	 	 	//$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
-	 	 	//$sql = "UPDATE orders SET ordername=?, items=? WHERE id=? AND user = ?";
-	        if ($stmt2 = $mysqli->prepare("UPDATE orders SET ordername=?, items=? WHERE id=? AND user = ?")) {
-		              $stmt2->bind_param("ssss", $ordername, $comma_separated, $id ,$usernameorder);
-		              $stmt2->execute();
-		              $found =1;
-		        }
+	 	 	$sql = "UPDATE orders SET ordername='$ordername', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
 	 	 }
+         //echo $sql;
+         $result = mysql_query($sql) or die ("Query error: " . mysql_error());
 
-
-    }
-
-    /* close statement */
-    $stmt->close();
-}
-
-/* close connection */
-$mysqli->close();
-
-
-              //echo $table;
-              if ($found == ""){
-                 echo '{"response":"0", "table":"0"}';
-              }else{
-                  echo "1";
-              }
-
-
-
-
-// $con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-// mysql_select_db($database, $con);
-
-
-// 	$con = mysql_connect($server, $username, $password) or die ("Could not connect: " . mysql_error());
-// 	mysql_select_db($database, $con);
-
-
-// 	    $sql0 = "SELECT username FROM users where cookie LIKE '" .  $usernameorder . "'";
-//         $result0 = mysql_query($sql0) or die ("Query error: " . mysql_error());
-//         while($row0 = mysql_fetch_array($result0)) {
-//             $usernameorder = $row0[0];
-
-// 		}
-
-// 		 if ($image != null || $image != ""){
-// 	     	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated', image='$image' WHERE id='$id' AND user = '$usernameorder'";
-// 	 	 }
-// 	 	 else{
-// 	 	 	$sql = "UPDATE orders SET ordername='$order', items='$comma_separated' WHERE id='$id' AND user = '$usernameorder'";
-// 	 	 }
-//          //echo $sql;
-//          $result = mysql_query($sql) or die ("Query error: " . mysql_error());
-
-// mysql_close($con);
+mysql_close($con);
 
 
 

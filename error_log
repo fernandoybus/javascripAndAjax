@@ -1,0 +1,143 @@
+[10-Aug-2015 03:22:39 America/Chicago] PHP Warning:  mysql_connect(): Access denied for user 'lamp'@'localhost' (using password: YES) in /home/deepl541/public_html/js_ajax_crud/login.php on line 26
+[10-Aug-2015 03:23:46 America/Chicago] PHP Warning:  mysql_connect(): Access denied for user 'lamp'@'localhost' (using password: YES) in /home/deepl541/public_html/js_ajax_crud/login.php on line 26
+[10-Aug-2015 03:25:21 America/Chicago] PHP Warning:  mysql_connect(): Access denied for user 'lamp'@'localhost' (using password: YES) in /home/deepl541/public_html/js_ajax_crud/login.php on line 26
+[10-Aug-2015 03:25:59 America/Chicago] PHP Warning:  mysql_connect(): Access denied for user 'lamp'@'localhost' (using password: YES) in /home/deepl541/public_html/js_ajax_crud/login.php on line 26
+[10-Aug-2015 03:26:47 America/Chicago] PHP Warning:  mysql_connect(): Access denied for user 'lamp'@'localhost' (using password: YES) in /home/deepl541/public_html/js_ajax_crud/login.php on line 26
+[10-Aug-2015 15:41:41 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:44:08 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:46:37 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:46:37 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:49:51 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:50:20 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:58:41 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:59:20 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[10-Aug-2015 15:59:38 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[11-Aug-2015 02:26:36 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[11-Aug-2015 02:47:13 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[11-Aug-2015 02:47:23 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[11-Aug-2015 02:47:23 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[11-Aug-2015 11:06:07 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[11-Aug-2015 11:06:07 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[11-Aug-2015 11:06:48 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[11-Aug-2015 19:26:47 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[11-Aug-2015 19:26:47 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[11-Aug-2015 19:27:00 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[11-Aug-2015 19:27:00 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[11-Aug-2015 19:27:40 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[11-Aug-2015 19:28:02 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[11-Aug-2015 19:28:02 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[12-Aug-2015 09:19:59 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[12-Aug-2015 10:09:42 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/resetpassword.php on line 53
+[12-Aug-2015 10:09:42 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/resetpassword.php on line 53
+[12-Aug-2015 10:11:00 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/resetpassword.php on line 53
+[12-Aug-2015 10:11:00 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/resetpassword.php on line 53
+[12-Aug-2015 10:54:22 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 10:54:22 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 10:57:02 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 10:57:02 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 11:00:04 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 11:00:04 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 11:02:15 America/Chicago] PHP Parse error:  syntax error, unexpected '"' WHERE email='"' (T_CONSTANT_ENCAPSED_STRING) in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 59
+[12-Aug-2015 11:03:36 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 11:03:36 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 61
+[12-Aug-2015 11:07:45 America/Chicago] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 62
+[12-Aug-2015 11:07:45 America/Chicago] PHP Warning:  mysql_query(): A link to the server could not be established in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 62
+[12-Aug-2015 12:27:24 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[12-Aug-2015 12:27:47 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[12-Aug-2015 12:28:09 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[12-Aug-2015 12:31:23 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[12-Aug-2015 12:31:36 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[12-Aug-2015 12:31:36 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[13-Aug-2015 19:27:51 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 60
+[13-Aug-2015 19:27:51 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 101
+[13-Aug-2015 19:28:04 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/post.php on line 53
+[13-Aug-2015 19:28:04 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 94
+[14-Aug-2015 13:28:46 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/gethashedcookie.php on line 8
+[14-Aug-2015 13:28:47 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/login.php on line 8
+[14-Aug-2015 13:28:49 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/login.php on line 8
+[14-Aug-2015 13:28:51 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/login.php on line 8
+[14-Aug-2015 13:29:27 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/login.php on line 8
+[14-Aug-2015 13:29:42 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/login.php on line 8
+[14-Aug-2015 14:17:18 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/recoverpassword.php on line 12
+[14-Aug-2015 14:17:43 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/recoverpassword.php on line 12
+[14-Aug-2015 14:29:51 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 13
+[14-Aug-2015 14:30:56 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 13
+[14-Aug-2015 14:34:00 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 13
+[14-Aug-2015 14:41:19 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 13
+[14-Aug-2015 14:42:49 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 13
+[14-Aug-2015 16:25:51 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/changepassword.php on line 13
+[14-Aug-2015 19:32:01 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/post.php on line 12
+[14-Aug-2015 19:48:22 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/post.php on line 54
+[14-Aug-2015 19:48:22 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 95
+[14-Aug-2015 22:52:29 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 17
+[14-Aug-2015 22:52:41 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/post.php on line 54
+[14-Aug-2015 22:52:41 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 95
+[14-Aug-2015 22:52:48 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/deleteorder.php on line 13
+[14-Aug-2015 23:07:17 America/Chicago] PHP Fatal error:  Call to undefined function sanitize() in /home/deepl541/public_html/js_ajax_crud/deleteorder.php on line 13
+[14-Aug-2015 23:16:56 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 62
+[14-Aug-2015 23:16:56 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 103
+[15-Aug-2015 22:40:46 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 44
+[15-Aug-2015 22:40:51 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 44
+[15-Aug-2015 22:42:41 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 44
+[15-Aug-2015 22:46:08 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::mysqli_stmt_get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 44
+[15-Aug-2015 22:49:40 America/Chicago] PHP Fatal error:  Call to undefined function fetch_assoc_statement() in /home/deepl541/public_html/js_ajax_crud/table.php on line 51
+[15-Aug-2015 22:50:17 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::mysqli_stmt_get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 45
+[15-Aug-2015 22:53:35 America/Chicago] PHP Warning:  mysqli_stmt::bind_result(): Number of bind variables doesn't match number of fields in prepared statement in /home/deepl541/public_html/js_ajax_crud/table.php on line 46
+[15-Aug-2015 22:54:44 America/Chicago] PHP Fatal error:  Cannot pass parameter 1 by reference in /home/deepl541/public_html/js_ajax_crud/table.php on line 46
+[15-Aug-2015 22:57:44 America/Chicago] PHP Warning:  Wrong parameter count for mysqli_stmt::bind_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 47
+[15-Aug-2015 23:02:30 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 69
+[15-Aug-2015 23:03:32 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 69
+[15-Aug-2015 23:03:50 America/Chicago] PHP Warning:  mysqli_stmt::bind_result(): Number of bind variables doesn't match number of fields in prepared statement in /home/deepl541/public_html/js_ajax_crud/table.php on line 70
+[15-Aug-2015 23:04:36 America/Chicago] PHP Warning:  mysqli_stmt::bind_result(): Number of bind variables doesn't match number of fields in prepared statement in /home/deepl541/public_html/js_ajax_crud/table.php on line 70
+[15-Aug-2015 23:04:51 America/Chicago] PHP Parse error:  syntax error, unexpected ')' in /home/deepl541/public_html/js_ajax_crud/table.php on line 70
+[15-Aug-2015 23:05:08 America/Chicago] PHP Warning:  mysqli_stmt::bind_result(): Number of bind variables doesn't match number of fields in prepared statement in /home/deepl541/public_html/js_ajax_crud/table.php on line 70
+[15-Aug-2015 23:08:43 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/getordertoedit.php on line 48
+[15-Aug-2015 23:12:10 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:12:10 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:12:21 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/post.php on line 56
+[15-Aug-2015 23:12:21 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[15-Aug-2015 23:14:43 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:14:43 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:19:02 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:19:02 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:19:39 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:19:39 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:21:01 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:21:01 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:21:21 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:21:21 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:22:31 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:22:31 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:22:45 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:22:45 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:23:18 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:23:18 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:24:26 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:24:26 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:25:37 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:25:37 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[15-Aug-2015 23:25:44 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[15-Aug-2015 23:25:44 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[18-Aug-2015 13:11:52 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[18-Aug-2015 13:11:52 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[18-Aug-2015 13:12:15 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:12:15 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[27-Aug-2015 19:12:15 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
+[27-Aug-2015 19:12:23 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/post.php on line 56
+[27-Aug-2015 19:12:23 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:12:43 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:13:44 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:13:44 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/post.php on line 137
+[27-Aug-2015 19:14:42 America/Chicago] PHP Parse error:  syntax error, unexpected 'each' (T_STRING), expecting '(' in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:15:25 America/Chicago] PHP Parse error:  syntax error, unexpected 'each' (T_STRING), expecting '(' in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:18:34 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/table.php on line 44
+[27-Aug-2015 19:19:27 America/Chicago] PHP Parse error:  syntax error, unexpected 'each' (T_STRING), expecting '(' in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:19:41 America/Chicago] PHP Parse error:  syntax error, unexpected 'each' (T_STRING), expecting '(' in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:21:16 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:21:16 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/post.php on line 137
+[27-Aug-2015 19:22:25 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:22:25 America/Chicago] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/deepl541/public_html/js_ajax_crud/post.php on line 137
+[27-Aug-2015 19:23:23 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:24:53 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/post.php on line 97
+[27-Aug-2015 19:29:16 America/Chicago] PHP Warning:  getimagesize(): Filename cannot be empty in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 64
+[27-Aug-2015 19:29:16 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/deepl541/public_html/js_ajax_crud/savechanges.php on line 105
